@@ -34,10 +34,9 @@ void readSerial(void *param){
 
   // Empty the buffer
   memset(buffer, 0, bufferSize);
+  Serial.println("@output: Read Serial Task Started...");
 
   for(;;){
-
-
     if(Serial.available() > 0){
       char_ = Serial.read();
 
@@ -47,6 +46,8 @@ void readSerial(void *param){
       }
 
       if(char_ == '\n'){
+        //Serial.println("@output: Read Serial Has Message!");
+
         buffer[index - 1] = '\0';
 
         if(!messageReady){
@@ -66,8 +67,12 @@ void readSerial(void *param){
 }
 
 void printSerial(void *param){
+  Serial.println("@output: Print Serial Task Started...");
+
   for(;;){
     if(messageReady){
+      //Serial.println("@output: Message Ready!");
+
       // Display
       Serial.print("@output: ");
       Serial.println(messagePtr);
@@ -79,5 +84,8 @@ void printSerial(void *param){
       // Reset
       messageReady = 0;
     }
+
+    // Yielding
+    vTaskDelay(200 / portTICK_PERIOD_MS);
   }
 }
