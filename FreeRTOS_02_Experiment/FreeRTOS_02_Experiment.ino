@@ -2,6 +2,7 @@
 //  * EXPERIMENT
 //  * First Task gets data from serial up to '\n'
 //  * Second Task prints data and frees memory
+//  * NOT WORKING WELL
 //-----------------------------------------------------------
 
 bool messageReady = 0;
